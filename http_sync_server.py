@@ -6,6 +6,27 @@ import asyncpg
 import datetime
 from db_config import DB, DB_USER, DB_PASSWORD, DB_ADRESS, DB_NAME
 
+
+async def status(request):
+    try:
+        response_obj = { 'server' : 'is up' }
+        return web.Response(text=json.dumps(response_obj), status=200)
+    
+    except KeyError as e:
+        response_obj = {
+            'status' : 'failed',
+            'key' : str(e)
+        }
+
+        return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=400)
+    except Exception as e:
+        response_obj = {
+            'status' : 'failed',
+            'reason' : str(e)
+            }
+        return web.Response(text=json.dumps(response_obj), status=500)
+
+
 #
 async def set_match(request: requests.Request) -> web.Response:
     r'''
@@ -28,7 +49,9 @@ async def set_match(request: requests.Request) -> web.Response:
         await connection.execute('UPDATE tags SET match_flag=$1 WHERE user_id=$2', match_status['status'], match_status['id'])
         await connection.close()
 
-        response_obj = { 'status' : 'success' }
+        response_obj = { 
+            'status' : 'success' 
+        }
         return web.Response(text=json.dumps(response_obj), status=200)
     except KeyError as e:
         response_obj = {
@@ -64,7 +87,6 @@ async def get_match_id(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = { 
-            'status' : 'success',
             'id' : row['match_id'] 
             }
         return web.Response(text=json.dumps(response_obj), status=200)
@@ -102,7 +124,6 @@ async def get_name(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = { 
-            'status' : 'success',
             'name' : row['name']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -140,7 +161,6 @@ async def get_city(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = { 
-            'status' : 'success',
             'city' : row['city']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -178,7 +198,6 @@ async def get_gender(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = { 
-            'status' : 'success',
             'gender' : row['gender']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -216,7 +235,6 @@ async def get_birthday(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = { 
-            'status' : 'success',
             'birthday' : str(row['birthday'])  # need this cause json can't serialize date type object
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -254,7 +272,6 @@ async def get_reason(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = { 
-            'status' : 'success',
             'reason' : row['reason']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -292,7 +309,6 @@ async def get_profile_photo_id(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = { 
-            'status' : 'success',
             'photo_id' : row['profile_photo_id']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -311,9 +327,9 @@ async def get_profile_photo_id(request: requests.Request) -> web.Response:
         return web.Response(text=json.dumps(response_obj), status=500)
 
 #
-async def get_subscribtion_end_date(request: requests.Request) -> web.Response:
+async def get_subscription_end_date(request: requests.Request) -> web.Response:
     r"""
-    Get end date of subscribtion from database
+    Get end date of subscription from database
     json in request must be:
     {
         'id': int number or string where str.isdigit() == True
@@ -326,7 +342,7 @@ async def get_subscribtion_end_date(request: requests.Request) -> web.Response:
             id = int(id)
 
         connection = await asyncpg.connect('%s://%s:%s@%s/%s' % (DB, DB_USER, DB_PASSWORD, DB_ADRESS, DB_NAME))
-        row = await connection.fetchrow('SELECT end_date FROM subscribtion WHERE user_id=$1', id)
+        row = await connection.fetchrow('SELECT end_date FROM subscription WHERE user_id=$1', id)
         await connection.close()
         
         end_date = row['end_date']
@@ -351,9 +367,9 @@ async def get_subscribtion_end_date(request: requests.Request) -> web.Response:
         return web.Response(text=json.dumps(response_obj), status=500)
 
 
-async def get_subscribtion_begin_date(request: requests.Request) -> web.Response:
+async def get_subscription_begin_date(request: requests.Request) -> web.Response:
     r"""
-    Get begin date of subscribtion from database
+    Get begin date of subscription from database
     json in request must be:
     {
         'id': int number or string where str.isdigit() == True
@@ -366,7 +382,7 @@ async def get_subscribtion_begin_date(request: requests.Request) -> web.Response
             id = int(id)
 
         connection = await asyncpg.connect('%s://%s:%s@%s/%s' % (DB, DB_USER, DB_PASSWORD, DB_ADRESS, DB_NAME))
-        row = await connection.fetchrow('SELECT begin_date FROM subscribtion WHERE user_id=$1', id)
+        row = await connection.fetchrow('SELECT begin_date FROM subscription WHERE user_id=$1', id)
         await connection.close()
         
         begin_date = row['begin_date']
@@ -410,7 +426,6 @@ async def get_pause_status(request: requests.Request) -> web.Response:
         await connection.close()
                 
         response_obj = { 
-            'status' : 'success',
             'paused' : row['matching_pause']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -448,7 +463,6 @@ async def get_reason_to_stop_communication(request: requests.Request) -> web.Res
         await connection.close()
         
         response_obj = { 
-            'status' : 'success',
             'reason_to_stop' : row['reason_to_stop_communication']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -488,7 +502,6 @@ async def get_meeting_status(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'was_meeting' : row['was_meeting']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -527,7 +540,6 @@ async def get_meeting_reaction(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'meeting_reaction' : row['meeting_reaction']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -566,7 +578,6 @@ async def get_reason_why_meeting_bad(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'why_bad' : row['why_meeting_bad']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -602,11 +613,10 @@ async def get_payment_url(request: requests.Request) -> web.Response:
             id = int(id)
 
         connection = await asyncpg.connect('%s://%s:%s@%s/%s' % (DB, DB_USER, DB_PASSWORD, DB_ADRESS, DB_NAME))
-        row = await connection.fetchrow('SELECT payment_url FROM subscribtion WHERE user_id=$1', id)
+        row = await connection.fetchrow('SELECT payment_url FROM subscription WHERE user_id=$1', id)
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'url' : row['payment_url']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -645,7 +655,6 @@ async def get_waiting_payment_status(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'is_waiting' : row['waiting_payment']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -684,7 +693,6 @@ async def get_matching_status(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'has_match' : row['match_flag']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -723,7 +731,6 @@ async def get_help_status(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'is_waiting_help' : row['waiting_help']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -762,7 +769,6 @@ async def get_first_time_status(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'is_first_time' : row['first_time']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -801,7 +807,6 @@ async def get_complain_status(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'is_complain' : row['communication_complain']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -840,7 +845,6 @@ async def get_fisrt_side_photo_id(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'photo_id' : row['first_side_photo_id']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -879,7 +883,6 @@ async def get_second_side_photo_id(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'photo_id' : row['second_side_photo_id']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -918,7 +921,6 @@ async def get_third_side_photo_id(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'photo_id' : row['third_side_photo_id']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -959,7 +961,6 @@ async def get_moderation_status(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'moderated' : row['moderated']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -1000,7 +1001,6 @@ async def get_first_time_moderated_status(request: requests.Request) -> web.Resp
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'is_first_time' : row['first_time_moderated']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -1041,7 +1041,6 @@ async def get_photo_moderation_status(request: requests.Request) -> web.Response
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'photo_ok' : row['photo_moderated']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -1082,7 +1081,6 @@ async def get_info_moderation_status(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'info_ok' : row['info_moderated']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -1123,7 +1121,6 @@ async def get_alogorithm_steps(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'step' : row['algorithm_steps']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -1164,7 +1161,6 @@ async def get_likes(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'likes' : row['likes']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -1205,7 +1201,6 @@ async def get_super_likes(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'superlikes' : row['superlikes']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -1246,7 +1241,6 @@ async def get_profile_photo_b64(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'b64' : row['b64_profile']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -1287,7 +1281,6 @@ async def get_first_side_photo_b64(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'b64' : row['b64_first_side']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -1328,7 +1321,6 @@ async def get_second_side_photo_b64(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'b64' : row['b64_second_side']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -1369,7 +1361,6 @@ async def get_third_side_photo_b64(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'b64' : row['b64_third_side']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -1410,7 +1401,6 @@ async def get_first_ex_photo_b64(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'b64' : row['b64_first_ex_photo']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -1451,7 +1441,6 @@ async def get_second_ex_photo_b64(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'b64' : row['b64_second_ex_photo']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -1492,7 +1481,6 @@ async def get_third_ex_photo_b64(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'b64' : row['b64_third_ex_photo']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -1533,7 +1521,6 @@ async def get_error_status(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'status' : 'success',
             'error_status' : row['error_flag']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
@@ -1555,7 +1542,7 @@ async def get_error_status(request: requests.Request) -> web.Response:
         return web.Response(text=json.dumps(response_obj), status=500)
 
 #
-async def table_initiation() -> web.Response:
+async def table_initiation(request) -> web.Response:
     r"""
     Tables initiation
     """
@@ -1602,7 +1589,7 @@ CREATE TABLE IF NOT EXISTS algorithm(
 				ON UPDATE CASCADE
 				);
 
-CREATE TABLE IF NOT EXISTS subscribtion(
+CREATE TABLE IF NOT EXISTS subscription(
 				id SERIAL PRIMARY KEY,
 				user_id bigint UNIQUE,
 				payment_url text,
@@ -1699,7 +1686,7 @@ async def create_new_user(request: requests.Request) -> web.Response:
             0)
         
         await connection.execute('''
-        INSERT INTO subscribtion(user_id, payment_url, begin_date,
+        INSERT INTO subscription(user_id, payment_url, begin_date,
                                 end_date)
                                 VALUES ($1, $2, $3,
                                 $4) ON CONFLICT (user_id) DO NOTHING;
@@ -2044,9 +2031,9 @@ async def set_profile_photo_id(request: requests.Request) -> web.Response:
         return web.Response(text=json.dumps(response_obj), status=500)
 
 #
-async def set_subscribtion_begin_date(request: requests.Request) -> web.Response:
+async def set_subscription_begin_date(request: requests.Request) -> web.Response:
     r'''
-    Post request to set begin of subscribtion date in data base
+    Post request to set begin of subscription date in data base
     json in request must be like
     {
         'id' : int number or string where str.isdigit() == True
@@ -2062,7 +2049,7 @@ async def set_subscribtion_begin_date(request: requests.Request) -> web.Response
         date = datetime.datetime.strptime(date, "%d.%m.%Y").date()
 
         connection = await asyncpg.connect('%s://%s:%s@%s/%s' % (DB, DB_USER, DB_PASSWORD, DB_ADRESS, DB_NAME))
-        await connection.execute('UPDATE subscribtion SET begin_date=$1 WHERE user_id=$2', date, id)
+        await connection.execute('UPDATE subscription SET begin_date=$1 WHERE user_id=$2', date, id)
         await connection.close()
 
         response_obj = {
@@ -2087,9 +2074,9 @@ async def set_subscribtion_begin_date(request: requests.Request) -> web.Response
         return web.Response(text=json.dumps(response_obj), status=500)
 
 #
-async def set_subscribtion_end_date(request: requests.Request) -> web.Response:
+async def set_subscription_end_date(request: requests.Request) -> web.Response:
     r'''
-    Post request to set end of subscribtion date in data base
+    Post request to set end of subscription date in data base
     json in request must be like
     {
         'id' : int number or string where str.isdigit() == True
@@ -2105,7 +2092,7 @@ async def set_subscribtion_end_date(request: requests.Request) -> web.Response:
         date = datetime.datetime.strptime(date, "%d.%m.%Y").date()
         
         connection = await asyncpg.connect('%s://%s:%s@%s/%s' % (DB, DB_USER, DB_PASSWORD, DB_ADRESS, DB_NAME))
-        await connection.execute('UPDATE subscribtion SET end_date=$1 WHERE user_id=$2', date, id)
+        await connection.execute('UPDATE subscription SET end_date=$1 WHERE user_id=$2', date, id)
         await connection.close()
 
         response_obj = {
@@ -2357,7 +2344,7 @@ async def set_payment_url(request: requests.Request) -> web.Response:
         url = request_dict['url']
 
         connection = await asyncpg.connect('%s://%s:%s@%s/%s' % (DB, DB_USER, DB_PASSWORD, DB_ADRESS, DB_NAME))
-        await connection.execute('UPDATE subscribtion SET payment_url=$1 WHERE user_id=$2', url, id)
+        await connection.execute('UPDATE subscription SET payment_url=$1 WHERE user_id=$2', url, id)
         await connection.close()
 
         response_obj = {
@@ -3430,10 +3417,10 @@ if __name__ == '__main__':
     app.router.add_post('/birthday', set_birthday)
     app.router.add_get('/reason', get_reason)
     app.router.add_post('/reason', set_reason)
-    app.router.add_get('/subscribtion/begin', get_subscribtion_begin_date)
-    app.router.add_post('/subscribtion/begin', set_subscribtion_begin_date)
-    app.router.add_get('/subscribtion/end', get_subscribtion_end_date)
-    app.router.add_post('/subscribtion/end', set_subscribtion_end_date)
+    app.router.add_get('/subscription/begin', get_subscription_begin_date)
+    app.router.add_post('/subscription/begin', set_subscription_begin_date)
+    app.router.add_get('/subscription/end', get_subscription_end_date)
+    app.router.add_post('/subscription/end', set_subscription_end_date)
     app.router.add_get('/match/paused', get_pause_status)
     app.router.add_post('/match/paused', set_matching_pause_status)
     app.router.add_get('/communication/reason_to_stop', get_reason_to_stop_communication)
@@ -3494,5 +3481,7 @@ if __name__ == '__main__':
     app.router.add_post('/education/superlikes', set_superlikes)
     app.router.add_get('/error', get_error_status)
     app.router.add_post('/error', set_error_status)
+    app.router.add_post('/status', status)
+    app.router.add_get('/status', status)
 
-    web.run_app(app, port=3333)
+    web.run_app(app, host='http://86.110.212.247', port=3333)

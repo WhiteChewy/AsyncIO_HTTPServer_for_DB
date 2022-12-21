@@ -12,7 +12,7 @@ For **SENDING** information to database use **POST** request
 
 For **GETTING** information from database use **GET** request
 
-**url** = 
+**url** = http://86.110.212.247:3333/
 
 ### Requirements
 | **lib** | **version** |
@@ -22,8 +22,32 @@ For **GETTING** information from database use **GET** request
 | requests | v. 2.25.1 |
 
 ### Example of requests
+
+#### Status, Initiation of Tables and creating new user
+Status
+```
+POST or GET:
+url = http://86.110.212.247:3333/status
+
+Answer if server is up:
+{"status": "server is up"}
+```
+Initiation of tables in database
+```
+POST or GET:
+url = http://86.110.212.247:3333/ini
+
+Answer if success:
+{"status": "success"}
+```
+
+Creating new user
+```
+```
+
 #### Profile
 Name:
 ```
+POST:
 url = http://86.110.212.247:3333
 ```
