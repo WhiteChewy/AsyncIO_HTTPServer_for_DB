@@ -345,7 +345,7 @@ async def get_subscription_end_date(request: requests.Request) -> web.Response:
         row = await connection.fetchrow('SELECT end_date FROM subscription WHERE user_id=$1', id)
         await connection.close()
         
-        end_date = row['end_date']
+        end_date = str(row['end_date'])
 
         response_obj = {
             'date' : end_date
@@ -385,7 +385,7 @@ async def get_subscription_begin_date(request: requests.Request) -> web.Response
         row = await connection.fetchrow('SELECT begin_date FROM subscription WHERE user_id=$1', id)
         await connection.close()
         
-        begin_date = row['begin_date']
+        begin_date = str(row['begin_date'])
 
         response_obj = {
             'date' : begin_date
@@ -3484,4 +3484,4 @@ if __name__ == '__main__':
     app.router.add_post('/status', status)
     app.router.add_get('/status', status)
 
-    web.run_app(app, host='http://86.110.212.247', port=3333)
+    web.run_app(app, host='86.110.212.247' ,port=3333)
