@@ -27,14 +27,13 @@ async def status(request):
         return web.Response(text=json.dumps(response_obj), status=500)
 
 
-#
 async def set_match(request: requests.Request) -> web.Response:
     r'''
     Set match status for user in DB.
     json in request must be:
     { 
-        'status': True/False (or 'True'/'False'),
-        'id' : int number or string with isdigit() == True
+        'id' : int number or string with isdigit() == True,
+        'status': True/False (or 'True'/'False')
     }
     '''
     try:
@@ -67,7 +66,7 @@ async def set_match(request: requests.Request) -> web.Response:
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_match_id(request: requests.Request) -> web.Response:
     r'''
     Get match id from database
@@ -104,7 +103,7 @@ async def get_match_id(request: requests.Request) -> web.Response:
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_name(request: requests.Request) -> web.Response:
     r'''
     Get name from database
@@ -141,7 +140,7 @@ async def get_name(request: requests.Request) -> web.Response:
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_city(request: requests.Request) -> web.Response:
     r"""
     Get city from database
@@ -178,7 +177,7 @@ async def get_city(request: requests.Request) -> web.Response:
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_gender(request: requests.Request) -> web.Response:
     r"""
     Get gender from database
@@ -215,7 +214,7 @@ async def get_gender(request: requests.Request) -> web.Response:
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_birthday(request: requests.Request) -> web.Response:
     r"""
     Get birthday from database as str object
@@ -252,7 +251,7 @@ async def get_birthday(request: requests.Request) -> web.Response:
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_reason(request: requests.Request) -> web.Response:
     r"""
     Get reason from database
@@ -289,7 +288,7 @@ async def get_reason(request: requests.Request) -> web.Response:
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_profile_photo_id(request: requests.Request) -> web.Response:
     r"""
     Get profile photo id from database as str object
@@ -326,7 +325,7 @@ async def get_profile_photo_id(request: requests.Request) -> web.Response:
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_subscription_end_date(request: requests.Request) -> web.Response:
     r"""
     Get end date of subscription from database
@@ -406,7 +405,7 @@ async def get_subscription_begin_date(request: requests.Request) -> web.Response
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_pause_status(request: requests.Request) -> web.Response:
     r"""
     Get pause status from database as bool object
@@ -443,7 +442,7 @@ async def get_pause_status(request: requests.Request) -> web.Response:
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_reason_to_stop_communication(request: requests.Request) -> web.Response:
     r"""
     Get users reason to stop communication from database as str object
@@ -481,7 +480,7 @@ async def get_reason_to_stop_communication(request: requests.Request) -> web.Res
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_meeting_status(request: requests.Request) -> web.Response:
     r"""
     Get status of meeting from database as bool object
@@ -520,7 +519,7 @@ async def get_meeting_status(request: requests.Request) -> web.Response:
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_meeting_reaction(request: requests.Request) -> web.Response:
     r"""
     Get meeting reaction from database as str object
@@ -558,7 +557,7 @@ async def get_meeting_reaction(request: requests.Request) -> web.Response:
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_reason_why_meeting_bad(request: requests.Request) -> web.Response:
     r"""
     Get reason why meeting was bad from database as str object
@@ -596,7 +595,7 @@ async def get_reason_why_meeting_bad(request: requests.Request) -> web.Response:
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_payment_url(request: requests.Request) -> web.Response:
     r"""
     Get payment url from database as str object
@@ -635,7 +634,7 @@ async def get_payment_url(request: requests.Request) -> web.Response:
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_waiting_payment_status(request: requests.Request) -> web.Response:
     r"""
     Get status of user waiting confirm payment url from database as bool object
@@ -655,7 +654,7 @@ async def get_waiting_payment_status(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'is_waiting' : row['waiting_payment']
+            'waiting' : row['waiting_payment']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
     
@@ -673,7 +672,7 @@ async def get_waiting_payment_status(request: requests.Request) -> web.Response:
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_matching_status(request: requests.Request) -> web.Response:
     r"""
     Get status of finding match for user from database as bool object
@@ -711,7 +710,7 @@ async def get_matching_status(request: requests.Request) -> web.Response:
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_help_status(request: requests.Request) -> web.Response:
     r"""
     Get status of user waiting help from moderation from database as bool object
@@ -731,7 +730,7 @@ async def get_help_status(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'is_waiting_help' : row['waiting_help']
+            'waiting_help' : row['waiting_help']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
     
@@ -749,7 +748,7 @@ async def get_help_status(request: requests.Request) -> web.Response:
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_first_time_status(request: requests.Request) -> web.Response:
     r"""
     Get status of first time user using service from database as bool object
@@ -769,7 +768,7 @@ async def get_first_time_status(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'is_first_time' : row['first_time']
+            'first_time' : row['first_time']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
     
@@ -787,7 +786,7 @@ async def get_first_time_status(request: requests.Request) -> web.Response:
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_complain_status(request: requests.Request) -> web.Response:
     r"""
     Get status of user complaining to communication from database as str object
@@ -807,7 +806,7 @@ async def get_complain_status(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'is_complain' : row['communication_complain']
+            'complain' : row['communication_complain']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
     
@@ -825,7 +824,7 @@ async def get_complain_status(request: requests.Request) -> web.Response:
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_fisrt_side_photo_id(request: requests.Request) -> web.Response:
     r"""
     Get first side photo id from database as str object
@@ -863,7 +862,7 @@ async def get_fisrt_side_photo_id(request: requests.Request) -> web.Response:
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_second_side_photo_id(request: requests.Request) -> web.Response:
     r"""
     Get second side photo id from database as str object
@@ -901,7 +900,7 @@ async def get_second_side_photo_id(request: requests.Request) -> web.Response:
             }
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_third_side_photo_id(request: requests.Request) -> web.Response:
     r"""
     Get second side photo id from database as str object
@@ -941,7 +940,7 @@ async def get_third_side_photo_id(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_moderation_status(request: requests.Request) -> web.Response:
     r"""
     Get moderation status from database as bool object
@@ -981,7 +980,7 @@ async def get_moderation_status(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_first_time_moderated_status(request: requests.Request) -> web.Response:
     r"""
     Get status of first time moderated tag from database as bool object
@@ -1001,7 +1000,7 @@ async def get_first_time_moderated_status(request: requests.Request) -> web.Resp
         await connection.close()
         
         response_obj = {
-            'is_first_time' : row['first_time_moderated']
+            'first_time' : row['first_time_moderated']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
     
@@ -1021,7 +1020,7 @@ async def get_first_time_moderated_status(request: requests.Request) -> web.Resp
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_photo_moderation_status(request: requests.Request) -> web.Response:
     r"""
     Get status photo moderation from database as str object
@@ -1061,7 +1060,7 @@ async def get_photo_moderation_status(request: requests.Request) -> web.Response
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_info_moderation_status(request: requests.Request) -> web.Response:
     r"""
     Get status of checking info from database like bool object
@@ -1077,7 +1076,7 @@ async def get_info_moderation_status(request: requests.Request) -> web.Response:
             id = int(id)
 
         connection = await asyncpg.connect('%s://%s:%s@%s/%s' % (DB, DB_USER, DB_PASSWORD, DB_ADRESS, DB_NAME))
-        row = await connection.fetchrow('SELECT info_moderated FROM users WHERE user_id=$1', id)
+        row = await connection.fetchrow('SELECT info_moderated FROM tags WHERE user_id=$1', id)
         await connection.close()
         
         response_obj = {
@@ -1101,7 +1100,7 @@ async def get_info_moderation_status(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_alogorithm_steps(request: requests.Request) -> web.Response:
     r"""
     Get algorithm steps from database like int object
@@ -1141,7 +1140,7 @@ async def get_alogorithm_steps(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_likes(request: requests.Request) -> web.Response:
     r"""
     Get number of likes from database like int object
@@ -1181,7 +1180,7 @@ async def get_likes(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_super_likes(request: requests.Request) -> web.Response:
     r"""
     Get number of superlikes from database like int object
@@ -1221,7 +1220,7 @@ async def get_super_likes(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_profile_photo_b64(request: requests.Request) -> web.Response:
     r"""
     Get profile photo base64 data from database like bytes string object
@@ -1261,7 +1260,7 @@ async def get_profile_photo_b64(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_first_side_photo_b64(request: requests.Request) -> web.Response:
     r"""
     Get first side photo base64 data from database like bytes string object
@@ -1301,7 +1300,7 @@ async def get_first_side_photo_b64(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_second_side_photo_b64(request: requests.Request) -> web.Response:
     r"""
     Get second side photo base64 data from database like bytes string object
@@ -1341,7 +1340,7 @@ async def get_second_side_photo_b64(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_third_side_photo_b64(request: requests.Request) -> web.Response:
     r"""
     Get third side photo base64 data from database like bytes string object
@@ -1381,7 +1380,7 @@ async def get_third_side_photo_b64(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_first_ex_photo_b64(request: requests.Request) -> web.Response:
     r"""
     Get first ex girlfriend/boyfriend photo base64 data from database like bytes string object
@@ -1421,7 +1420,7 @@ async def get_first_ex_photo_b64(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_second_ex_photo_b64(request: requests.Request) -> web.Response:
     r"""
     Get second ex girlfriend/boyfriend photo base64 data from database like bytes string object
@@ -1461,7 +1460,7 @@ async def get_second_ex_photo_b64(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_third_ex_photo_b64(request: requests.Request) -> web.Response:
     r"""
     Get third ex girlfriend/boyfriend photo base64 data from database like bytes string object
@@ -1501,7 +1500,7 @@ async def get_third_ex_photo_b64(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def get_error_status(request: requests.Request) -> web.Response:
     r"""
     Get error status for checking mediagroups from database like bytes string object
@@ -1521,7 +1520,7 @@ async def get_error_status(request: requests.Request) -> web.Response:
         await connection.close()
         
         response_obj = {
-            'error_status' : row['error_flag']
+            'error' : row['error_flag']
             }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
     
@@ -1541,7 +1540,7 @@ async def get_error_status(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def table_initiation(request) -> web.Response:
     r"""
     Tables initiation
@@ -1654,7 +1653,7 @@ CREATE TABLE IF NOT EXISTS unmatching(
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def create_new_user(request: requests.Request) -> web.Response:
     r'''
     creating new user in database
@@ -1777,7 +1776,7 @@ async def create_new_user(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_name(request: requests.Request) -> web.Response:
     r'''
     Post request to set name of user to database
@@ -1819,7 +1818,7 @@ async def set_name(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_city(request: requests.Request) -> web.Response:
     r'''
     Post request to set city of user to database
@@ -1861,7 +1860,7 @@ async def set_city(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_gender(request: requests.Request) -> web.Response:
     r'''
     Post request to set gender of user to database
@@ -1903,7 +1902,7 @@ async def set_gender(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_birthday(request: requests.Request) -> web.Response:
     r'''
     Post request to set gender of user to database
@@ -1946,7 +1945,7 @@ async def set_birthday(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_reason(request: requests.Request) ->web.Response:
     r'''
     Post request to set reason of finding match of user to database
@@ -1988,7 +1987,7 @@ async def set_reason(request: requests.Request) ->web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_profile_photo_id(request: requests.Request) -> web.Response:
     r'''
     Post request to set profile photo id to database
@@ -2030,7 +2029,7 @@ async def set_profile_photo_id(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_subscription_begin_date(request: requests.Request) -> web.Response:
     r'''
     Post request to set begin of subscription date in data base
@@ -2073,7 +2072,7 @@ async def set_subscription_begin_date(request: requests.Request) -> web.Response
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_subscription_end_date(request: requests.Request) -> web.Response:
     r'''
     Post request to set end of subscription date in data base
@@ -2116,7 +2115,7 @@ async def set_subscription_end_date(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_matching_pause_status(request: requests.Request) -> web.Response:
     r'''
     Post request to set matching pause status to database
@@ -2158,7 +2157,7 @@ async def set_matching_pause_status(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_reason_to_stop_communication(request: requests.Request) -> web.Response:
     r'''
     Post request to set reason to stop communicating to database
@@ -2200,7 +2199,7 @@ async def set_reason_to_stop_communication(request: requests.Request) -> web.Res
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_meeting_status(request: requests.Request) -> web.Response:
     r'''
     Post request to set status is there was meeting to database
@@ -2242,7 +2241,7 @@ async def set_meeting_status(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_meeting_reaction(request: requests.Request) -> web.Response:
     r'''
     Post request to set meeting reaction to database
@@ -2284,7 +2283,7 @@ async def set_meeting_reaction(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_reason_why_meeting_bad(request: requests.Request) -> web.Response:
     r'''
     Post request to set reason why meeting was bad to database
@@ -2326,7 +2325,7 @@ async def set_reason_why_meeting_bad(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_payment_url(request: requests.Request) -> web.Response:
     r'''
     Post request to set payment url to database
@@ -2368,7 +2367,7 @@ async def set_payment_url(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_waiting_payment_status(request: requests.Request) -> web.Response:
     r'''
     Post request to set waiting payment status to database
@@ -2410,7 +2409,7 @@ async def set_waiting_payment_status(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_waiting_for_help_status(request: requests.Request) -> web.Response:
     r'''
     Post request to set status of waiting for help to database
@@ -2452,7 +2451,7 @@ async def set_waiting_for_help_status(request: requests.Request) -> web.Response
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_first_time_status(request: requests.Request) -> web.Response:
     r'''
     Post request to set first time status to database
@@ -2494,7 +2493,7 @@ async def set_first_time_status(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_complain_status(request: requests.Request) -> web.Response:
     r'''
     Post request to set communication complain to database
@@ -2536,7 +2535,7 @@ async def set_complain_status(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_match_id(request: requests.Request) -> web.Response:
     r'''
     Post request to set match id to database
@@ -2580,7 +2579,7 @@ async def set_match_id(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_first_side_photo_id(request: requests.Request) -> web.Response:
     r'''
     Post request to set first side photo id to database
@@ -2622,7 +2621,7 @@ async def set_first_side_photo_id(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_second_side_photo_id(request: requests.Request) -> web.Response:
     r'''
     Post request to set second side photo id to database
@@ -2664,7 +2663,7 @@ async def set_second_side_photo_id(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_third_side_photo_id(request: requests.Request) -> web.Response:
     r'''
     Post request to set third side photo id to database
@@ -2706,7 +2705,7 @@ async def set_third_side_photo_id(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_moderated_status(request: requests.Request) -> web.Response:
     r'''
     Post request to set status of moderation to database
@@ -2748,7 +2747,7 @@ async def set_moderated_status(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_first_time_moderated_status(request: requests.Request) -> web.Response:
     r'''
     Post request to set first time moderated profile to database
@@ -2790,7 +2789,7 @@ async def set_first_time_moderated_status(request: requests.Request) -> web.Resp
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_photo_moderation_status(request: requests.Request) -> web.Response:
     r'''
     Post request to set does photo of profile pass moderation to database
@@ -2832,7 +2831,7 @@ async def set_photo_moderation_status(request: requests.Request) -> web.Response
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_info_moderation_status(request: requests.Request) -> web.Response:
     r'''
     Post request to set info moderation status to database
@@ -2874,7 +2873,7 @@ async def set_info_moderation_status(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_alogorithm_steps(request: requests.Request) -> web.Response:
     r'''
     Post request to set algorithm steps number to database
@@ -2918,7 +2917,7 @@ async def set_alogorithm_steps(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_likes(request: requests.Request) -> web.Response:
     r'''
     Post request to set likes number to database
@@ -2962,7 +2961,7 @@ async def set_likes(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_superlikes(request: requests.Request) -> web.Response:
     r'''
     Post request to set superlikes number to database
@@ -3006,7 +3005,7 @@ async def set_superlikes(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_profile_photo_b64(request: requests.Request) -> web.Response:
     r'''
     Post request to set photo in base64 format to database
@@ -3056,7 +3055,7 @@ async def set_profile_photo_b64(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_first_side_photo_b64(request: requests.Request) -> web.Response:
     r'''
     Post request to set first side photo in base64 format to database
@@ -3106,7 +3105,7 @@ async def set_first_side_photo_b64(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_second_side_photo_b64(request: requests.Request) -> web.Response:
     r'''
     Post request to set second side photo in base64 format to database
@@ -3156,7 +3155,7 @@ async def set_second_side_photo_b64(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_third_side_photo_b64(request: requests.Request) -> web.Response:
     r'''
     Post request to set third side photo in base64 format to database
@@ -3182,7 +3181,7 @@ async def set_third_side_photo_b64(request: requests.Request) -> web.Response:
         photo_b64 = request_dict['b64']
 
         connection = await asyncpg.connect('%s://%s:%s@%s/%s' % (DB, DB_USER, DB_PASSWORD, DB_ADRESS, DB_NAME))
-        await connection.execute('UPDATE users SET b64_3rd=$1 WHERE user_id=$2', photo_b64, id)
+        await connection.execute('UPDATE photos SET b64_third_side=$1 WHERE user_id=$2', photo_b64, id)
         await connection.close()
 
         response_obj = {
@@ -3206,7 +3205,7 @@ async def set_third_side_photo_b64(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_first_ex_photo_b64(request: requests.Request) -> web.Response:
     r'''
     Post request to set first photo for correction of NN in base64 format to database
@@ -3256,7 +3255,7 @@ async def set_first_ex_photo_b64(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_second_ex_photo_b64(request: requests.Request) -> web.Response:
     r'''
     Post request to set photo in base64 format to database
@@ -3306,7 +3305,7 @@ async def set_second_ex_photo_b64(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_third_ex_photo_b64(request: requests.Request) -> web.Response:
     r'''
     Post request to set photo in base64 format to database
@@ -3356,7 +3355,7 @@ async def set_third_ex_photo_b64(request: requests.Request) -> web.Response:
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
-#
+
 async def set_error_status(request: requests.Request) -> web.Response:
     r'''
     Post request to set info moderation status to database
