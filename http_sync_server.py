@@ -1690,9 +1690,9 @@ async def create_new_user(request: requests.Request) -> web.Response:
                                 VALUES ($1, $2, $3,
                                 $4) ON CONFLICT (user_id) DO NOTHING;
         ''',#8  9    10
-            id, '', None,
+            id, '', datetime.date.today()-datetime.timedelta(days=1),
             #11
-            None)
+            datetime.date.today()-datetime.timedelta(days=1))
         
         await connection.execute('''
         INSERT INTO photos(user_id, profile_photo_id, b64_profile,
@@ -3393,7 +3393,7 @@ async def set_error_status(request: requests.Request) -> web.Response:
         response_obj = {
             'status' : 'failed',
             'reason' : str(e)
-            }
+        }
         
         return web.Response(text=json.dumps(response_obj), status=500)
 
