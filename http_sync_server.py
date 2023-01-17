@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from aiohttp import web
+import aiohttp
 import json
 import requests
 import asyncpg
@@ -1952,22 +1953,62 @@ async def set_reason(request: requests.Request) ->web.Response:
     json in request must be:
     {
         'id': int number or string where str.isdigit() == True
-        'reason' : string
+        'reason' : string,
+        'tg_username' : string
     }
     '''
     try:
         request_dict = await request.json()
         id = request_dict['id']
+        username = request_dict['tg_username']
+
         if type(id) == str and id.isdigit():
             id = int(id)
         reason = request_dict['reason']
 
         connection = await asyncpg.connect('%s://%s:%s@%s/%s' % (DB, DB_USER, DB_PASSWORD, DB_ADRESS, DB_NAME))
         await connection.execute('UPDATE users SET reason=$1 WHERE user_id=$2', reason, id)
-        await connection.close()
+        
+        date = await connection.fetchrow('SELECT birthday FROM users WHERE user_id=$1', id)
+        datestr = date['birthday'].strftime('%d/%m/%Y')
+        city = await connection.fetchrow('SELECT city FROM users WHERE user_id=$1', id)
+        name = await connection.fetchrow('SELECT name FROM users WHERE user_id=$1', id)
+        reasons = { 'Серьезные отношения' : 'SERIOUS',
+            'Создание семьи' : 'FAMILY',
+            'Дружба и общение' : 'FRIENDSHIP',
+            'Встречи без обязательств' : 'SEX',
+            'Затрудняюсь ответить' : 'OTHER'
+            }
+        cities = { 'Санкт-Петербург' : 'SAINT-PETERSBURG',
+            'Москва' : 'MOSCOW',
+            'Самара' : 'SAMARA',
+            'Кочевник' : 'NOMAD' }
 
+        # Adding 
+        async with aiohttp.ClientSession() as session:
+            async with session.post(url='https://server.unison.dating/user/add',
+                                    json={'birthday' : datestr,
+                                            'city' : cities[city['city']],
+                                            'gender' : 'мужчина',
+                                            'name' : name['name'],
+
+                                            'phone' : '+79522288751',
+                                            'reason' : reasons[reason],
+                                            'userid' : id,
+                                            'tg_id' : id,
+                                            'tg_username' : username,
+                                            }) as resp:
+                text = await resp.text()
+        
+        await connection.close()
         response_obj = {
-            'status' : 'success'
+            'status' : 'success',
+            'service_response' : text,
+            'date' : datestr,
+            'city' : cities[city['city']],
+            'name' : name['name'],
+            'reason' : reasons[reason],
+            'username' : username
         }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
     
@@ -2136,8 +2177,12 @@ async def set_matching_pause_status(request: requests.Request) -> web.Response:
         await connection.execute('UPDATE tags SET matching_pause=$1 WHERE user_id=$2', pause, id)
         await connection.close()
 
+        async with aiohttp.ClientSession() as session:
+            async with session.post(url='https://server.unison.dating/user/pause?user_id=%s' % request_dict['id'], json={"pause": True}) as resp: res = await resp.text()
+
         response_obj = {
-            'status' : 'success'
+            'status' : 'success',
+            'response_from_service' : res
         }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
     
@@ -3182,10 +3227,35 @@ async def set_third_side_photo_b64(request: requests.Request) -> web.Response:
 
         connection = await asyncpg.connect('%s://%s:%s@%s/%s' % (DB, DB_USER, DB_PASSWORD, DB_ADRESS, DB_NAME))
         await connection.execute('UPDATE photos SET b64_third_side=$1 WHERE user_id=$2', photo_b64, id)
+        
+        # Adding
+        row =  await connection.fetchrow('SELECT b64_profile FROM photos WHERE user_id=$1', id)
+        b64_profile = row['b64_profile']
+        row =  await connection.fetchrow('SELECT b64_first_side FROM photos WHERE user_id=$1', id)
+        b64_first = row['b64_first_side']
+        row =  await connection.fetchrow('SELECT b64_second_side FROM photos WHERE user_id=$1', id)
+        b64_second = row['b64_second_side']
+        row =  await connection.fetchrow('SELECT b64_third_side FROM photos WHERE user_id=$1', id)
+        b64_third = row['b64_third_side']
+        async with aiohttp.ClientSession() as session:
+            async with session.post(url='https://server.unison.dating/user/add_photos/self?user_id=%s' % id,
+                                    json={
+                                        'main_photo' : "data:image/jpeg;base64," + b64_profile,
+                                        'other_photos' : [
+                                            "data:image/jpeg;base64," + b64_first,
+                                            "data:image/jpeg;base64," + b64_second,
+                                            "data:image/jpeg;base64," + b64_third
+                                            ]
+                                            }) as resp:
+                text = await resp.text()
+        
         await connection.close()
 
+
+
         response_obj = {
-            'status' : 'success'
+            'status' : 'success',
+            'response_from_main_server' : text
         }
         return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
     
@@ -3482,5 +3552,5 @@ if __name__ == '__main__':
     app.router.add_post('/error', set_error_status)
     app.router.add_post('/status', status)
     app.router.add_get('/status', status)
-
+    # web.run_app(app)
     web.run_app(app, host='86.110.212.247' ,port=3333)
