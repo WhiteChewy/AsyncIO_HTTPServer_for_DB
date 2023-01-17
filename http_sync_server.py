@@ -2178,7 +2178,7 @@ async def set_matching_pause_status(request: requests.Request) -> web.Response:
         await connection.close()
 
         async with aiohttp.ClientSession() as session:
-            async with session.post(url='https://server.unison.dating/user/pause?user_id=%s' % request_dict['id'], json={"pause": True}) as resp: res = await resp.text()
+            async with session.post(url='https://server.unison.dating/user/pause?user_id=%s' % request_dict['id'], json={"pause": pause}) as resp: res = await resp.text()
 
         response_obj = {
             'status' : 'success',
