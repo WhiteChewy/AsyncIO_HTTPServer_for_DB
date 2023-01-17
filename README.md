@@ -85,11 +85,8 @@ Response if success:
 ```
 GET:
 ```
-url = http://86.110.212.247:3333/name
+url = http://86.110.212.247:3333/name?user_id=123123123'
 
-json = {
-    'id' : 1234567890  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -117,11 +114,8 @@ Response if success:
 
 GET:
 ```
-url = http://86.110.212.247:3333/city
+url = http://86.110.212.247:3333/city?user_id=123123123'
 
-json = {
-    'id' : 1234567890  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -149,11 +143,8 @@ Response if success:
 
 GET:
 ```
-url='http://86.110.212.247:3333/gender'
+url='http://86.110.212.247:3333/gender?user_id=123123123'
 
-json ={
-    'id' : 1234567890  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -182,11 +173,8 @@ Response if success:
 
 GET:
 ```
-url='http://86.110.212.247:3333/birthday'
+url='http://86.110.212.247:3333/birthday?user_id=123123123'
 
-json={
-    'id' : 1234567890
-}
 
 Response if success:
 <Response [200]>
@@ -215,11 +203,8 @@ Response if success:
 
 GET:
 ```
-url='http://86.110.212.247:3333/reason'
+url='http://86.110.212.247:3333/reason?user_id=123123123'
 
-json={
-    'id' : 1234567890  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -248,11 +233,8 @@ Response if success:
 
 GET:
 ```
-url='http://86.110.212.247:3333/match/id'
+url='http://86.110.212.247:3333/match/id?user_id=123123123'
 
-json={
-    'id' : 1234567890  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -284,11 +266,8 @@ Response if success:
 
 GET:
 ```
-url='http://86.110.212.247:3333/photo/profile_id'
+url='http://86.110.212.247:3333/photo/profile_id?user_id=123123123'
 
-json={
-    'id' : 1234567890  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -319,11 +298,8 @@ Response if success:
 
 GET:
 ```
-url='http://86.110.212.247:3333/photo/profile_b64'
+url='http://86.110.212.247:3333/photo/profile_b64?user_id=123123123'
 
-json={
-    'id' : 1234567890  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -353,11 +329,8 @@ Response if success:
 
 GET:
 ```
-url='http://86.110.212.247:3333/photo/side/first_id'
+url='http://86.110.212.247:3333/photo/side/first_id?user_id=123123123'
 
-json={
-    'id' : 1234567890  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -389,11 +362,8 @@ Response if success:
 
 GET:
 ```
-url='http://86.110.212.247:3333/photo/side/first_b64'
+url='http://86.110.212.247:3333/photo/side/first_b64?user_id=123123123'
 
-json={
-    'id' : 1234567890  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -423,11 +393,8 @@ Response if success:
 
 GET:
 ```
-url='http://86.110.212.247:3333/photo/side/second_id'
+url='http://86.110.212.247:3333/photo/side/second_id?user_id=123123123'
 
-json={
-    'id' : 1234567890  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -459,11 +426,8 @@ Response if success:
 
 GET:
 ```
-url='http://86.110.212.247:3333/photo/side/second_b64'
+url='http://86.110.212.247:3333/photo/side/second_b64?user_id=123123123'
 
-json={
-    'id' : 1234567890  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -493,11 +457,8 @@ Response if success:
 
 GET:
 ```
-url='http://86.110.212.247:3333/photo/side/third_id'
+url='http://86.110.212.247:3333/photo/side/third_id?user_id=123123123'
 
-json={
-    'id' : 1234567890  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -529,11 +490,8 @@ Response if success:
 
 GET:
 ```
-url='http://86.110.212.247:3333/photo/side/third_b64'
+url='http://86.110.212.247:3333/photo/side/third_b64?user_id=123123123'
 
-json={
-    'id' : 1234567890  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -565,11 +523,8 @@ Response if success:
 
 GET:
 ```
-url='http://86.110.212.247:3333/photo/ex/first_photo_b64'
+url='http://86.110.212.247:3333/photo/ex/first_photo_b64?user_id=123123123'
 
-json={
-    'id' : 1234567890  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -601,11 +556,8 @@ Response if success:
 
 GET:
 ```
-url='http://86.110.212.247:3333/photo/ex/second_photo_b64'
+url='http://86.110.212.247:3333/photo/ex/second_photo_b64?user_id=123123123'
 
-json={
-    'id' : 1234567890  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -637,11 +589,8 @@ Response if success:
 
 GET:
 ```
-url='http://86.110.212.247:3333/photo/ex/third_photo_b64'
+url='http://86.110.212.247:3333/photo/ex/third_photo_b64?user_id=123123123'
 
-json={
-    'id' : 1234567890  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -673,11 +622,8 @@ Response if success:
 
 GET:
 ```
-url='http://86.110.212.247:3333/payment/url'
+url='http://86.110.212.247:3333/payment/url?user_id=123123123'
 
-json = {
-    'id' : 877505237  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -706,11 +652,8 @@ Response if success:
 
 GET:
 ```
-url='http://86.110.212.247:3333/subscription/begin'
+url='http://86.110.212.247:3333/subscription/begin?user_id=123123123'
 
-json={
-    'id' : 1234567890  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -739,11 +682,8 @@ Response if success:
 
 GET:
 ```
-url='http://86.110.212.247:3333/subscription/end'
+url='http://86.110.212.247:3333/subscription/end?user_id=123123123'
 
-json={
-    'id' : 1234567890  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -779,11 +719,8 @@ Response if success:
 
 GET:
 ```
-url = http://86.110.212.247:3333/match/paused
+url = 'http://86.110.212.247:3333/match/paused?user_id=123123123'
 
-json = {
-    'id' : 1234567890,  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -815,11 +752,8 @@ Response if success:
 
 GET:
 ```
-url = http://86.110.212.247:3333/meeting/status
+url = 'http://86.110.212.247:3333/meeting/status?user_id=123123123'
 
-json = {
-    'id' : 1234567890,  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -850,11 +784,8 @@ Response if success:
 
 GET:
 ```
-url = http://86.110.212.247:3333/payment/waiting
+url = 'http://86.110.212.247:3333/payment/waiting?user_id=123123123'
 
-json = {
-    'id' : 1234567890,  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -886,11 +817,8 @@ Response if success:
 
 GET:
 ```
-url = http://86.110.212.247:3333/help/status
+url = 'http://86.110.212.247:3333/help/status?user_id=123123123'
 
-json = {
-    'id' : 1234567890,  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -921,11 +849,8 @@ Response if success:
 
 GET:
 ```
-url = http://86.110.212.247:3333/first_time
+url = 'http://86.110.212.247:3333/first_time?user_id=123123123'
 
-json = {
-    'id' : 1234567890,  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -956,11 +881,8 @@ Response if success:
 
 GET:
 ```
-url = http://86.110.212.247:3333/communication/complain/status
+url = 'http://86.110.212.247:3333/communication/complain/status?user_id=123123123'
 
-json = {
-    'id' : 1234567890,  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -991,11 +913,8 @@ Response if success:
 
 GET:
 ```
-url = http://86.110.212.247:3333/moderation/status
+url = 'http://86.110.212.247:3333/moderation/status?user_id=123123123'
 
-json = {
-    'id' : 1234567890,  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -1026,11 +945,8 @@ Response if success:
 
 GET:
 ```
-url = http://86.110.212.247:3333/moderation/first_time
+url = 'http://86.110.212.247:3333/moderation/first_time?user_id=123123123'
 
-json = {
-    'id' : 1234567890,  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -1045,12 +961,8 @@ Shows if user photos pass moderation
 
 POST:
 ```
-url = http://86.110.212.247:3333/moderation/photo_ok
+url = 'http://86.110.212.247:3333/moderation/photo_ok?user_id=123123123'
 
-json = {
-    'id' : 1234567890,  # TelegramID (or id) . Must be int number or string.isdigit() == True
-    'status' : True/False  # bool
-}
 
 Response if success:
 <Response [200]>
@@ -1061,11 +973,8 @@ Response if success:
 
 GET:
 ```
-url = http://86.110.212.247:3333/moderation/photo_ok
+url = 'http://86.110.212.247:3333/moderation/photo_ok?user_id=123123123'
 
-json = {
-    'id' : 1234567890,  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -1080,12 +989,8 @@ Shows if user profile information pass moderation
 
 POST:
 ```
-url = http://86.110.212.247:3333/moderation/info_ok
+url = 'http://86.110.212.247:3333/moderation/info_ok?user_id=123123123'
 
-json = {
-    'id' : 1234567890,  # TelegramID (or id) . Must be int number or string.isdigit() == True
-    'status' : True/False  # bool
-}
 
 Response if success:
 <Response [200]>
@@ -1131,11 +1036,8 @@ Response if success:
 
 GET:
 ```
-url = http://86.110.212.247:3333/error
+url = http://86.110.212.247:3333/error?user_id=123123123'
 
-json = {
-    'id' : 1234567890,  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -1166,11 +1068,8 @@ Response if success:
 
 GET:
 ```
-url = http://86.110.212.247:3333/match/status
+url = http://86.110.212.247:3333/match/status?user_id=123123123'
 
-json = {
-    'id' : 1234567890,  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -1204,11 +1103,8 @@ Response if success:
 
 GET:
 ```
-url = http://86.110.212.247:3333/education/steps
+url = http://86.110.212.247:3333/education/steps?user_id=123123123'
 
-json = {
-    'id' : 1234567890,  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -1239,11 +1135,8 @@ Response if success:
 
 GET:
 ```
-url = http://86.110.212.247:3333/education/likes
+url = http://86.110.212.247:3333/education/likes?user_id=123123123'
 
-json = {
-    'id' : 1234567890,  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -1274,11 +1167,8 @@ Response if success:
 
 GET:
 ```
-url = http://86.110.212.247:3333/education/superlikes
+url = http://86.110.212.247:3333/education/superlikes?user_id=123123123'
 
-json = {
-    'id' : 1234567890,  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -1311,11 +1201,8 @@ Response if success:
 
 GET:
 ```
-url = http://86.110.212.247:3333/communication/reason_to_stop
+url = http://86.110.212.247:3333/communication/reason_to_stop?user_id=123123123'
 
-json = {
-    'id' : 1234567890,  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -1346,11 +1233,8 @@ Response if success:
 
 GET:
 ```
-url = http://86.110.212.247:3333/meeting/reaction
+url = http://86.110.212.247:3333/meeting/reaction?user_id=123123123'
 
-json = {
-    'id' : 1234567890,  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
@@ -1381,11 +1265,8 @@ Response if success:
 
 GET:
 ```
-url = http://86.110.212.247:3333/meeting/why_bad
+url = http://86.110.212.247:3333/meeting/why_bad?user_id=123123123'
 
-json = {
-    'id' : 1234567890,  # TelegramID (or id) . Must be int number or string.isdigit() == True
-}
 
 Response if success:
 <Response [200]>
