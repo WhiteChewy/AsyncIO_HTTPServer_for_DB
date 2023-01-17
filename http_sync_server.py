@@ -108,14 +108,11 @@ async def get_match_id(request: requests.Request) -> web.Response:
 async def get_name(request: requests.Request) -> web.Response:
     r'''
     Get name from database
-    json in request must be:
-    {
-        'id' : int number or string with str.isdigit() == True
-    }
+    expected url = ''
     '''
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -151,8 +148,8 @@ async def get_city(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -188,8 +185,8 @@ async def get_gender(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -225,8 +222,8 @@ async def get_birthday(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -262,8 +259,8 @@ async def get_reason(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -299,8 +296,8 @@ async def get_profile_photo_id(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -336,8 +333,8 @@ async def get_subscription_end_date(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -376,8 +373,8 @@ async def get_subscription_begin_date(request: requests.Request) -> web.Response
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -416,8 +413,8 @@ async def get_pause_status(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -453,8 +450,8 @@ async def get_reason_to_stop_communication(request: requests.Request) -> web.Res
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -492,8 +489,8 @@ async def get_meeting_status(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -530,8 +527,8 @@ async def get_meeting_reaction(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -568,8 +565,8 @@ async def get_reason_why_meeting_bad(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -607,8 +604,8 @@ async def get_payment_url(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -645,8 +642,8 @@ async def get_waiting_payment_status(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -683,8 +680,8 @@ async def get_matching_status(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -721,8 +718,8 @@ async def get_help_status(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -759,8 +756,8 @@ async def get_first_time_status(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -797,8 +794,8 @@ async def get_complain_status(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -835,8 +832,8 @@ async def get_fisrt_side_photo_id(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -873,8 +870,8 @@ async def get_second_side_photo_id(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -911,8 +908,8 @@ async def get_third_side_photo_id(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -951,8 +948,8 @@ async def get_moderation_status(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -991,8 +988,8 @@ async def get_first_time_moderated_status(request: requests.Request) -> web.Resp
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1031,8 +1028,8 @@ async def get_photo_moderation_status(request: requests.Request) -> web.Response
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1071,8 +1068,8 @@ async def get_info_moderation_status(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1111,8 +1108,8 @@ async def get_alogorithm_steps(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1151,8 +1148,8 @@ async def get_likes(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1191,8 +1188,8 @@ async def get_super_likes(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1231,8 +1228,8 @@ async def get_profile_photo_b64(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1271,8 +1268,8 @@ async def get_first_side_photo_b64(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1311,8 +1308,8 @@ async def get_second_side_photo_b64(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1351,8 +1348,8 @@ async def get_third_side_photo_b64(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1391,8 +1388,8 @@ async def get_first_ex_photo_b64(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1431,8 +1428,8 @@ async def get_second_ex_photo_b64(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1471,8 +1468,8 @@ async def get_third_ex_photo_b64(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1511,8 +1508,8 @@ async def get_error_status(request: requests.Request) -> web.Response:
     }
     """
     try:
-        request_dict = await request.json()
-        id = request_dict['id']
+        params_dict = request.params
+        id = params_dict['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
