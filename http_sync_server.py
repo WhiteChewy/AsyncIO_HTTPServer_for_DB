@@ -71,14 +71,10 @@ async def set_match(request: requests.Request) -> web.Response:
 async def get_match_id(request: requests.Request) -> web.Response:
     r'''
     Get match id from database
-    json in request must be:
-    {
-        'id' : int number or string with isdigit() == True
-    }
+    expected params -- user_id
     '''
     try:
-        request_dict = await request.json()
-        user_id = request_dict['id']
+        user_id = request.rel_url.query['user_id']
         if type(user_id) == str and user_id.isdigit():
             user_id = int(user_id)
 
@@ -108,11 +104,10 @@ async def get_match_id(request: requests.Request) -> web.Response:
 async def get_name(request: requests.Request) -> web.Response:
     r'''
     Get name from database
-    expected url = ''
+    expected parametrs -- user_id
     '''
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -142,14 +137,10 @@ async def get_name(request: requests.Request) -> web.Response:
 async def get_city(request: requests.Request) -> web.Response:
     r"""
     Get city from database
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -179,14 +170,10 @@ async def get_city(request: requests.Request) -> web.Response:
 async def get_gender(request: requests.Request) -> web.Response:
     r"""
     Get gender from database
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -216,14 +203,10 @@ async def get_gender(request: requests.Request) -> web.Response:
 async def get_birthday(request: requests.Request) -> web.Response:
     r"""
     Get birthday from database as str object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -253,14 +236,10 @@ async def get_birthday(request: requests.Request) -> web.Response:
 async def get_reason(request: requests.Request) -> web.Response:
     r"""
     Get reason from database
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -290,14 +269,10 @@ async def get_reason(request: requests.Request) -> web.Response:
 async def get_profile_photo_id(request: requests.Request) -> web.Response:
     r"""
     Get profile photo id from database as str object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -327,14 +302,10 @@ async def get_profile_photo_id(request: requests.Request) -> web.Response:
 async def get_subscription_end_date(request: requests.Request) -> web.Response:
     r"""
     Get end date of subscription from database
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -367,14 +338,10 @@ async def get_subscription_end_date(request: requests.Request) -> web.Response:
 async def get_subscription_begin_date(request: requests.Request) -> web.Response:
     r"""
     Get begin date of subscription from database
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -407,14 +374,10 @@ async def get_subscription_begin_date(request: requests.Request) -> web.Response
 async def get_pause_status(request: requests.Request) -> web.Response:
     r"""
     Get pause status from database as bool object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -444,14 +407,10 @@ async def get_pause_status(request: requests.Request) -> web.Response:
 async def get_reason_to_stop_communication(request: requests.Request) -> web.Response:
     r"""
     Get users reason to stop communication from database as str object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -483,14 +442,10 @@ async def get_meeting_status(request: requests.Request) -> web.Response:
     r"""
     Get status of meeting from database as bool object
     it shows was there meeting between user and match
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -521,14 +476,10 @@ async def get_meeting_status(request: requests.Request) -> web.Response:
 async def get_meeting_reaction(request: requests.Request) -> web.Response:
     r"""
     Get meeting reaction from database as str object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -559,14 +510,10 @@ async def get_meeting_reaction(request: requests.Request) -> web.Response:
 async def get_reason_why_meeting_bad(request: requests.Request) -> web.Response:
     r"""
     Get reason why meeting was bad from database as str object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -598,14 +545,10 @@ async def get_payment_url(request: requests.Request) -> web.Response:
     r"""
     Get payment url from database as str object
     it shows was there meeting between user and match
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -636,14 +579,10 @@ async def get_payment_url(request: requests.Request) -> web.Response:
 async def get_waiting_payment_status(request: requests.Request) -> web.Response:
     r"""
     Get status of user waiting confirm payment url from database as bool object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -674,14 +613,10 @@ async def get_waiting_payment_status(request: requests.Request) -> web.Response:
 async def get_matching_status(request: requests.Request) -> web.Response:
     r"""
     Get status of finding match for user from database as bool object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -712,14 +647,10 @@ async def get_matching_status(request: requests.Request) -> web.Response:
 async def get_help_status(request: requests.Request) -> web.Response:
     r"""
     Get status of user waiting help from moderation from database as bool object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -750,14 +681,10 @@ async def get_help_status(request: requests.Request) -> web.Response:
 async def get_first_time_status(request: requests.Request) -> web.Response:
     r"""
     Get status of first time user using service from database as bool object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -788,14 +715,10 @@ async def get_first_time_status(request: requests.Request) -> web.Response:
 async def get_complain_status(request: requests.Request) -> web.Response:
     r"""
     Get status of user complaining to communication from database as str object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -826,14 +749,10 @@ async def get_complain_status(request: requests.Request) -> web.Response:
 async def get_fisrt_side_photo_id(request: requests.Request) -> web.Response:
     r"""
     Get first side photo id from database as str object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -864,14 +783,10 @@ async def get_fisrt_side_photo_id(request: requests.Request) -> web.Response:
 async def get_second_side_photo_id(request: requests.Request) -> web.Response:
     r"""
     Get second side photo id from database as str object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -902,14 +817,10 @@ async def get_second_side_photo_id(request: requests.Request) -> web.Response:
 async def get_third_side_photo_id(request: requests.Request) -> web.Response:
     r"""
     Get second side photo id from database as str object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -942,14 +853,10 @@ async def get_third_side_photo_id(request: requests.Request) -> web.Response:
 async def get_moderation_status(request: requests.Request) -> web.Response:
     r"""
     Get moderation status from database as bool object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -982,14 +889,10 @@ async def get_moderation_status(request: requests.Request) -> web.Response:
 async def get_first_time_moderated_status(request: requests.Request) -> web.Response:
     r"""
     Get status of first time moderated tag from database as bool object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1022,14 +925,10 @@ async def get_first_time_moderated_status(request: requests.Request) -> web.Resp
 async def get_photo_moderation_status(request: requests.Request) -> web.Response:
     r"""
     Get status photo moderation from database as str object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1062,14 +961,10 @@ async def get_photo_moderation_status(request: requests.Request) -> web.Response
 async def get_info_moderation_status(request: requests.Request) -> web.Response:
     r"""
     Get status of checking info from database like bool object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1102,14 +997,10 @@ async def get_info_moderation_status(request: requests.Request) -> web.Response:
 async def get_alogorithm_steps(request: requests.Request) -> web.Response:
     r"""
     Get algorithm steps from database like int object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1142,14 +1033,10 @@ async def get_alogorithm_steps(request: requests.Request) -> web.Response:
 async def get_likes(request: requests.Request) -> web.Response:
     r"""
     Get number of likes from database like int object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1182,14 +1069,10 @@ async def get_likes(request: requests.Request) -> web.Response:
 async def get_super_likes(request: requests.Request) -> web.Response:
     r"""
     Get number of superlikes from database like int object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1222,14 +1105,10 @@ async def get_super_likes(request: requests.Request) -> web.Response:
 async def get_profile_photo_b64(request: requests.Request) -> web.Response:
     r"""
     Get profile photo base64 data from database like bytes string object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1262,14 +1141,10 @@ async def get_profile_photo_b64(request: requests.Request) -> web.Response:
 async def get_first_side_photo_b64(request: requests.Request) -> web.Response:
     r"""
     Get first side photo base64 data from database like bytes string object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1302,14 +1177,10 @@ async def get_first_side_photo_b64(request: requests.Request) -> web.Response:
 async def get_second_side_photo_b64(request: requests.Request) -> web.Response:
     r"""
     Get second side photo base64 data from database like bytes string object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1342,14 +1213,10 @@ async def get_second_side_photo_b64(request: requests.Request) -> web.Response:
 async def get_third_side_photo_b64(request: requests.Request) -> web.Response:
     r"""
     Get third side photo base64 data from database like bytes string object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1382,14 +1249,10 @@ async def get_third_side_photo_b64(request: requests.Request) -> web.Response:
 async def get_first_ex_photo_b64(request: requests.Request) -> web.Response:
     r"""
     Get first ex girlfriend/boyfriend photo base64 data from database like bytes string object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1422,14 +1285,10 @@ async def get_first_ex_photo_b64(request: requests.Request) -> web.Response:
 async def get_second_ex_photo_b64(request: requests.Request) -> web.Response:
     r"""
     Get second ex girlfriend/boyfriend photo base64 data from database like bytes string object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1462,14 +1321,10 @@ async def get_second_ex_photo_b64(request: requests.Request) -> web.Response:
 async def get_third_ex_photo_b64(request: requests.Request) -> web.Response:
     r"""
     Get third ex girlfriend/boyfriend photo base64 data from database like bytes string object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
@@ -1502,14 +1357,10 @@ async def get_third_ex_photo_b64(request: requests.Request) -> web.Response:
 async def get_error_status(request: requests.Request) -> web.Response:
     r"""
     Get error status for checking mediagroups from database like bytes string object
-    json in request must be:
-    {
-        'id': int number or string where str.isdigit() == True
-    }
+    expected params -- user_id 
     """
     try:
-        params_dict = request.params
-        id = params_dict['user_id']
+        id = request.rel_url.query['user_id']
         if type(id) == str and id.isdigit():
             id = int(id)
 
