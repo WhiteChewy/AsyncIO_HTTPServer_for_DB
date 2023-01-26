@@ -3316,6 +3316,159 @@ async def set_error_status(request: requests.Request) -> web.Response:
         return web.Response(text=json.dumps(response_obj), status=500)
 
 
+async def moderation_pass(request: requests.Request) -> web.Response:
+    r"""
+    Get status of meeting from database as bool object
+    it shows was there meeting between user and match
+    expected params -- user_id 
+    """
+    try:
+        id = request.rel_url.query['user_id']
+        if type(id) == str and id.isdigit():
+            id = int(id)
+
+        connection = await asyncpg.connect('%s://%s:%s@%s/%s' % (DB, DB_USER, DB_PASSWORD, DB_ADRESS, DB_NAME))
+        await connection.execute('UPDATE tags SET moderated = $1 WHERE user_id=$2', True, id)
+        await connection.execute('UPDATE tags SET info_moderated = $1 WHERE user_id=$2', True, id)
+        await connection.execute('UPDATE tags SET photo_moderated = $1 WHERE user_id=$2', True, id)
+        await connection.execute('UPDATE tags SET first_time_moderated = $1 WHERE user_id = $2', False, id)
+        await connection.close()
+        
+        response_obj = {
+            'status' : 'success'
+            }
+        return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
+    
+    except KeyError as e:
+        response_obj = {
+            'status' : 'failed',
+            'key' : str(e)
+        }
+
+        return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=400)
+    
+    except Exception as e:
+        response_obj = {
+            'status' : 'failed',
+            'reason' : str(e)
+            }
+        return web.Response(text=json.dumps(response_obj), status=500)
+    pass
+
+
+async def info_no_pass(request: requests.Request) -> web.Response:
+    r"""
+    Get status of meeting from database as bool object
+    it shows was there meeting between user and match
+    expected params -- user_id 
+    """
+    try:
+        id = request.rel_url.query['user_id']
+        if type(id) == str and id.isdigit():
+            id = int(id)
+
+        connection = await asyncpg.connect('%s://%s:%s@%s/%s' % (DB, DB_USER, DB_PASSWORD, DB_ADRESS, DB_NAME))
+        await connection.execute('UPDATE tags SET info_moderated = $1 WHERE user_id=$2', False, id)
+        await connection.execute('UPDATE tags SET first_time_moderated = $1 WHERE user_id = $2', False, id)
+        await connection.close()
+        
+        response_obj = {
+            'status' : 'success'
+            }
+        return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
+    
+    except KeyError as e:
+        response_obj = {
+            'status' : 'failed',
+            'key' : str(e)
+        }
+
+        return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=400)
+    
+    except Exception as e:
+        response_obj = {
+            'status' : 'failed',
+            'reason' : str(e)
+            }
+        return web.Response(text=json.dumps(response_obj), status=500)
+    pass
+
+
+async def photo_no_pass(request: requests.Request) -> web.Response:
+    r"""
+    Get status of meeting from database as bool object
+    it shows was there meeting between user and match
+    expected params -- user_id 
+    """
+    try:
+        id = request.rel_url.query['user_id']
+        if type(id) == str and id.isdigit():
+            id = int(id)
+
+        connection = await asyncpg.connect('%s://%s:%s@%s/%s' % (DB, DB_USER, DB_PASSWORD, DB_ADRESS, DB_NAME))
+        await connection.execute('UPDATE tags SET photo_moderated = $1 WHERE user_id=$2', False, id)
+        await connection.execute('UPDATE tags SET first_time_moderated = $1 WHERE user_id = $2', False, id)
+        await connection.close()
+        
+        response_obj = {
+            'status' : 'success'
+            }
+        return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
+    
+    except KeyError as e:
+        response_obj = {
+            'status' : 'failed',
+            'key' : str(e)
+        }
+
+        return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=400)
+    
+    except Exception as e:
+        response_obj = {
+            'status' : 'failed',
+            'reason' : str(e)
+            }
+        return web.Response(text=json.dumps(response_obj), status=500)
+
+
+async def no_pass(request: requests.Request) -> web.Response:
+    r"""
+    Get status of meeting from database as bool object
+    it shows was there meeting between user and match
+    expected params -- user_id 
+    """
+    try:
+        id = request.rel_url.query['user_id']
+        if type(id) == str and id.isdigit():
+            id = int(id)
+
+        connection = await asyncpg.connect('%s://%s:%s@%s/%s' % (DB, DB_USER, DB_PASSWORD, DB_ADRESS, DB_NAME))
+        await connection.execute('UPDATE tags SET info_moderated = $1 WHERE user_id=$2', False, id)
+        await connection.execute('UPDATE tags SET photo_moderated = $1 WHERE user_id=$2', False, id)
+        await connection.execute('UPDATE tags SET first_time_moderated = $1 WHERE user_id = $2', False, id)
+        await connection.close()
+        
+        response_obj = {
+            'status' : 'success'
+            }
+        return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=200)
+    
+    except KeyError as e:
+        response_obj = {
+            'status' : 'failed',
+            'key' : str(e)
+        }
+
+        return web.Response(text=json.dumps(response_obj, ensure_ascii=False), status=400)
+    
+    except Exception as e:
+        response_obj = {
+            'status' : 'failed',
+            'reason' : str(e)
+            }
+        return web.Response(text=json.dumps(response_obj), status=500)
+
+
 if __name__ == '__main__':
     app = web.Application()
     app.router.add_get('/new_user', create_new_user)
@@ -3400,5 +3553,9 @@ if __name__ == '__main__':
     app.router.add_post('/error', set_error_status)
     app.router.add_post('/status', status)
     app.router.add_get('/status', status)
+    app.router.add_get('/moderation/pass', moderation_pass)
+    app.router.add_get('/moderation/info_no_pass', info_no_pass)
+    app.router.add_get('/moderation/photo_no_pass', photo_no_pass)
+    app.router.add_get('/moderation/no_pass', no_pass)
     # web.run_app(app)
     web.run_app(app, host='86.110.212.247' ,port=3333)
