@@ -1821,26 +1821,69 @@ async def set_reason(request: requests.Request) ->web.Response:
         datestr = date['birthday'].strftime('%d/%m/%Y')
         city = await connection.fetchrow('SELECT city FROM users WHERE user_id=$1', id)
         name = await connection.fetchrow('SELECT name FROM users WHERE user_id=$1', id)
+        gender = await connection.fetchrow('SELECT gender FROM users WHERE user_id=$1', id)
         reasons = { 'Серьезные отношения' : 'SERIOUS',
-            'Создание семьи' : 'FAMILY',
-            'Дружба и общение' : 'FRIENDSHIP',
-            'Встречи без обязательств' : 'SEX',
-            'Затрудняюсь ответить' : 'OTHER'
-            }
-        cities = { 'Санкт-Петербург' : 'SAINT-PETERSBURG',
-            'Москва' : 'MOSCOW',
-            'Самара' : 'SAMARA',
-            'Кочевник' : 'NOMAD' }
-
+                    'Создание семьи' : 'FAMILY',
+                    'Дружба и общение' : 'FRIENDSHIP',
+                    'Встречи без обязательств' : 'SEX',
+                    'Затрудняюсь ответить' : 'OTHER'
+                    }
+        cities = {  'Санкт-Петербург' : 'SAINT-PETERSBURG',
+                    'Москва' : 'MOSCOW',
+                    'Самара' : 'SAMARA',
+                    'Кочевник' : 'NOMAD',
+                    'Новосибирск' : 'NOVOSIBIRSK',
+                    'Екатеринбург' : 'EKATERINBURG',
+                    'Казань' : 'KAZAN',
+                    'Нижний Новгород' : 'NIZHNIY-NOVGOROD',
+                    'Челябинск' : 'CHELYABINSK',
+                    'Уфа' : 'UFA',
+                    'Ростов-На-Дону' : 'ROSTOV',
+                    'Омск' : 'OMSK',
+                    'Красноярск' : 'KRASNOYARSK',
+                    'Воронеж' : 'VORONEZH',
+                    'Пермь' : 'PERM',
+                    'Волгоград' : 'VOLGOGRAD',
+                    'Краснодар' : 'KRASNODAR',
+                    'Тюмень' : 'TUMEN',
+                    'Саратов' : 'SARATOV',
+                    'Сочи' : 'SOCHI',
+                    'Нью-Йорк' : 'NEW-YORK',
+                    'Saint-Petersburg' : 'SAINT-PETERSBURG',
+                    'Moscow' : 'MOSCOW',
+                    'Samara' : 'SAMARA',
+                    'Nomad' : 'NOMAD',
+                    'Novosibisrsk' : 'NOVOSIBIRSK',
+                    'Ekaterinburg' : 'EKATERINBURG',
+                    'Kazan' : 'KAZAN',
+                    'Nizhniy Novgorod' : 'NIZHNIY-NOVGOROD',
+                    'Chelyabinsk' : 'Chelyabinsk',
+                    'Ufa' : 'UFA',
+                    'Rostov-na-Donu' : 'ROSTOV',
+                    'Omsk' : 'OMSK',
+                    'Krasnoyarsk' : 'KRASNOYARSK',
+                    'Voronezh' : 'VORONEZH',
+                    'Perm' : 'PERM',
+                    'Volgograd' : 'VOLGOGRAD',
+                    'Krasnodar' : 'KRASNODAR',
+                    'Tumen' : 'TUMEN',
+                    'Saratov' : 'SARATOV',
+                    'Sochi' : 'SOCHI',
+                    'New-York' : 'NEW-YORK',
+                    }
+        genders = {
+            'М' : 'мужчина',
+            'Ж' : 'женщина',
+        }
         # Adding 
         async with aiohttp.ClientSession() as session:
             async with session.post(url='https://server.unison.dating/user/add',
                                     json={'birthday' : datestr,
                                             'city' : cities[city['city']],
-                                            'gender' : 'мужчина',
+                                            'gender' : genders[gender['gender']],
                                             'name' : name['name'],
 
-                                            'phone' : '+79522288751',
+                                            'phone' : '',
                                             'reason' : reasons[reason],
                                             'userid' : id,
                                             'tg_id' : id,
@@ -3083,8 +3126,8 @@ async def set_third_side_photo_b64(request: requests.Request) -> web.Response:
         b64_first = row['b64_first_side']
         row =  await connection.fetchrow('SELECT b64_second_side FROM photos WHERE user_id=$1', id)
         b64_second = row['b64_second_side']
-        row =  await connection.fetchrow('SELECT b64_third_side FROM photos WHERE user_id=$1', id)
-        b64_third = row['b64_third_side']
+        b64_third = request_dict['b64']
+        
         async with aiohttp.ClientSession() as session:
             async with session.post(url='https://server.unison.dating/user/add_photos/self?user_id=%s' % id,
                                     json={
