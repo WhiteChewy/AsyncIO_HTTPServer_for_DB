@@ -1857,7 +1857,7 @@ async def set_reason(request: requests.Request) ->web.Response:
                     'Ekaterinburg' : 'EKATERINBURG',
                     'Kazan' : 'KAZAN',
                     'Nizhniy Novgorod' : 'NIZHNIY-NOVGOROD',
-                    'Chelyabinsk' : 'Chelyabinsk',
+                    'Chelyabinsk' : 'CHELYABINSK',
                     'Ufa' : 'UFA',
                     'Rostov-na-Donu' : 'ROSTOV',
                     'Omsk' : 'OMSK',
@@ -1869,7 +1869,7 @@ async def set_reason(request: requests.Request) ->web.Response:
                     'Tumen' : 'TUMEN',
                     'Saratov' : 'SARATOV',
                     'Sochi' : 'SOCHI',
-                    'New-York' : 'NEW-YORK',
+                    'New York' : 'NEW YORK',
                     }
         genders = {
             'М' : 'мужчина',
@@ -3131,11 +3131,11 @@ async def set_third_side_photo_b64(request: requests.Request) -> web.Response:
         async with aiohttp.ClientSession() as session:
             async with session.post(url='https://server.unison.dating/user/add_photos/self?user_id=%s' % id,
                                     json={
-                                        'main_photo' : "data:image/jpeg;base64," + b64_profile,
+                                        'main_photo' : b64_profile,
                                         'other_photos' : [
-                                            "data:image/jpeg;base64," + b64_first,
-                                            "data:image/jpeg;base64," + b64_second,
-                                            "data:image/jpeg;base64," + b64_third
+                                            b64_first,
+                                            b64_second,
+                                            b64_third
                                             ]
                                             }) as resp:
                 text = await resp.text()
